@@ -1,32 +1,97 @@
 <!DOCTYPE HTML>
 <html>
+<head>
+    <!-- Normally would use SCSS and separate files. -->
+    <style>
+        .calculator {
+            width: 180px;
+            border: 1px solid #999;
+            border-radius: 4px;
+            padding: 5px;
+        }
+
+        .display {
+            border: 1px solid #999;
+            border-radius: 4px;
+            height: 20px;
+            padding: 5px;
+
+            display: flex;
+            align-items: center;
+        }
+
+        .row {
+            display: flex;
+            margin-top: 5px;
+        }
+        .row > div {
+            display: inline-flex;
+
+            width: 40px;
+            height: 30px;
+            border: 1px solid #999;
+            border-radius: 4px;
+            font-family: sans-serif;
+            align-items: center;
+            justify-content: center;
+
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+
+        }
+        .row > div:hover {
+            cursor: pointer;
+        }
+        .row > div:not(:last-child) {
+            margin-right: 5px;
+        }
+
+        /* Trick for display to always take up space
+         * https://stackoverflow.com/questions/3416454/how-to-make-an-empty-div-take-space
+         */
+        .display:empty::after {
+            content: ".";
+            visibility: hidden;
+        }
+    </style>
+</head>
 <body>
+    <div class="calculator">
+        <div class="display" id="display"></div>
+        <div class="row">
+            <div onclick="calc.press(7);">7</div>
+            <div onclick="calc.press(8);">8</div>
+            <div onclick="calc.press(9);">9</div>
+            <div onclick="calc.add();">+</div>
+        </div>
+        <div class="row">
+            <div onclick="calc.press(4);">4</div>
+            <div onclick="calc.press(5);">5</div>
+            <div onclick="calc.press(6);">6</div>
+            <div onclick="calc.sub();">−</div>
+        </div>
+        <div class="row">
+            <div onclick="calc.press(1);">1</div>
+            <div onclick="calc.press(2);">2</div>
+            <div onclick="calc.press(3);">3</div>
+            <div onclick="calc.mul();">×</div>
+        </div>
+        <div class="row">
+            <div onclick="calc.press(0);">0</div>
+            <div onclick="calc.pct();">%</div>
+            <div onclick="calc.sqrt();">√</div>
+            <div onclick="calc.div();">÷</div>
+        </div>
+        <div class="row">
+            <div onclick="calc.equals();">=</div>
+            <div onclick="calc.clear();">C</div>
+        </div>
+    </div>
 
-	<div>
-		<div id="display"></div>
-		<div onclick="calc.press(1);">1</div>
-		<div onclick="calc.press(2);">2</div>
-		<div onclick="calc.press(3);">3</div>
-		<div onclick="calc.press(4);">4</div>
-		<div onclick="calc.press(5);">5</div>
-		<div onclick="calc.press(6);">6</div>
-		<div onclick="calc.press(7);">7</div>
-		<div onclick="calc.press(8);">8</div>
-		<div onclick="calc.press(9);">9</div>
-		<div onclick="calc.press(0);">0</div>
-		<div onclick="calc.add();">+</div>
-		<div onclick="calc.sub();">-</div>
-		<div onclick="calc.mul();">*</div>
-		<div onclick="calc.div();">/</div>
-		<div onclick="calc.pct();">%</div>
-		<div onclick="calc.sqrt();">√</div>
-		<div onclick="calc.equals();">=</div>
-		<div onclick="calc.clear();">C</div>
-	</div>
-
-	<!-- Some fancier importing would be nice here, like using require() instead,
-		 and only importing one script -->
-	<script type="text/javascript" src="calc.js"></script>
-	<script type="text/javascript" src="main.js"></script>
+    <!-- Some fancier importing would be nice here, like using require() instead,
+         and only importing one script -->
+    <script type="text/javascript" src="calc.js"></script>
+    <script type="text/javascript" src="main.js"></script>
 </body>
 </html>
