@@ -1,6 +1,7 @@
 class Calculator {
 	constructor() {
 		this.eventHandlers = {};
+		this.isResult = false; // true if the current display is a result
 
 		this.add = this._makeOp(() => {
 			this.setDisplay(this.display + this.stashed);
@@ -18,10 +19,12 @@ class Calculator {
 		this.pct = () => {
 			this._flush();
 			this.setDisplay(this.display * 0.01);
+			this.isResult = true;
 		};
 		this.sqrt = () => {
 			this._flush();
 			this.setDisplay(Math.sqrt(this.display));
+			this.isResult = true;
 		};
 	}
 
@@ -41,6 +44,8 @@ class Calculator {
 		if (this._queued) {
 			this._queued.call(this);
 			this._queued = null;
+
+			this.isResult = true;
 		}
 	}
 
@@ -54,6 +59,8 @@ class Calculator {
 				this._queue(fn);
 				return;
 			}
+
+			this.isResult = false;
 
 			this._flush();
 			this._stash();
@@ -76,9 +83,15 @@ class Calculator {
 
 	clear() {
 		this.setDisplay(null);
+		this.isResult = false;
+		this._queued = null;
 	}
 
 	press(num) {
+		if (this.isResult) {
+			return;
+		}
+
 		if (this.display) {
 			this.setDisplay((this.display * 10) + num);
 		} else {

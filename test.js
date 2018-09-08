@@ -80,6 +80,15 @@ describe('calculator', () => {
         expect(calc.getDisplay()).toBe(30);
     });
 
+    it('ignores key presses in a result', () => {
+        calc.press(1);
+        calc.press(0);
+        calc.pct();
+
+        calc.press(2);
+        expect(calc.getDisplay()).toBe(0.1);
+    });
+
 
     it('can clear', () => {
         calc.press(1);
