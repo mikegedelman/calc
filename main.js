@@ -21,8 +21,10 @@ const keymap = {
 	'/': () => calc.div(),
 	'%': () => calc.pct(),
 	'Enter': () => calc.equals(),
-	'c': () => calc.clear(),
-	'Escape': () => calc.clear()
+	'=': () => calc.equals(),
+	'Clear': () => calc.clear(),
+	'Escape': () => calc.clear(),
+	'Backspace': () => calc.backspace()
 };
 
 document.onkeydown = e => {
@@ -30,6 +32,7 @@ document.onkeydown = e => {
     const key = e.key
     
     if (keymap[key]) {
+    	e.preventDefault();
     	keymap[key]();
     }
 };

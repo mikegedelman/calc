@@ -13,6 +13,8 @@ then nagivate to http://localhost:8080
 
 The calculator supports basic arithmetic plus percentage and sqrt. Only positive integers may be entered by the user, but subsequent operations may use floats. 
 
+To simplify design, user input is ignored unless the calculator has been cleared, or after an operation symbol. You can't type over a result that's being displayed.
+
 # Notes
 
 This is a simple demo calculator written in vanilla Javascript. No dependencies, not even jQuery!

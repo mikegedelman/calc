@@ -44,6 +44,7 @@ class Calculator {
 		if (this._queued) {
 			this._queued.call(this);
 			this._queued = null;
+			this._stashed = null;
 
 			this.isResult = true;
 		}
@@ -56,7 +57,9 @@ class Calculator {
 		return function () {
 			// Handle if user presses an op key twice: just queue a different fn
 			if (!this.display) {
-				this._queue(fn);
+				if (this.stashed) {
+					this._queue(fn);
+				}
 				return;
 			}
 
@@ -85,6 +88,12 @@ class Calculator {
 		this.setDisplay(null);
 		this.isResult = false;
 		this._queued = null;
+	}
+
+	backspace() {
+		if (this.display && !this.isResult) {
+			this.setDisplay(Math.floor(this.display / 10));
+		}
 	}
 
 	press(num) {

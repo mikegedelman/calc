@@ -97,6 +97,18 @@ describe('calculator', () => {
         expect(calc.getDisplay()).toBeFalsy();
     });
 
+    it('can backspace', () => {
+        calc.press(1);
+        calc.press(2);
+        calc.press(3);
+        calc.backspace();
+        calc.press(4);
+        calc.press(5);
+        calc.backspace();
+
+        expect(calc.getDisplay()).toBe(124);
+    })
+
     it('emits update-display events', done => {
         calc.on('update-display', done);
 
