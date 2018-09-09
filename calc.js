@@ -17,12 +17,10 @@ class Calculator {
 		});
 
 		this.pct = () => {
-			this._flush();
 			this.setDisplay(this.display * 0.01);
 			this.isResult = true;
 		};
 		this.sqrt = () => {
-			this._flush();
 			this.setDisplay(Math.sqrt(this.display));
 			this.isResult = true;
 		};

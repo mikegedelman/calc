@@ -66,6 +66,19 @@ describe('calculator', () => {
         expect(calc.getDisplay()).toBe(3);
     });
 
+    it('supports one-arg ops during another op', () => {
+        // calculate percent of current display during an addition op
+
+        calc.press(1);
+        calc.press(0);
+        calc.add();
+        calc.press(60);
+        calc.pct();
+        calc.equals();
+
+        expect(calc.getDisplay()).toEqual(10.6);
+    });
+
     it('can handle key presses', () => {
         // Enter "10" and multiply by 3
         calc.press(1);
